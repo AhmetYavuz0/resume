@@ -148,6 +148,15 @@
                   </v-list-item>
                 </v-list>
               </v-card>
+              <div
+                class="badge-base LI-profile-badge mt-4"
+                data-locale="tr_TR"
+                data-size="medium"
+                data-theme="light"
+                data-type="VERTICAL"
+                data-vanity="dev-ahmet-yavuz"
+                data-version="v1"
+              />
             </v-col>
           </v-row>
         </v-container>
