@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="blue-grey-darken-4" dark>
+    <v-app-bar app color="blue-grey-darken-4">
       <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer" />
 
       <v-toolbar-title class="font-weight-bold">AHMET YAVUZ</v-toolbar-title>
@@ -14,6 +14,10 @@
         <v-btn href="#egitim-tecrube" text>Eğitim & Tecrübe</v-btn>
         <v-btn href="#iletisim" text>İletişim</v-btn>
       </div>
+
+      <v-btn class="d-none d-md-flex" icon @click="toggleTheme">
+        <v-icon>{{ currentTheme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary>
@@ -36,19 +40,25 @@
         <v-list-item href="#iletisim" link @click="drawer = false">
           <v-list-item-title>İletişim</v-list-item-title>
         </v-list-item>
+
+        <v-list-item link @click="toggleTheme">
+          <template #prepend>
+            <v-icon>{{ currentTheme === 'light' ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+          </template>
+          <v-list-item-title>{{ currentTheme === 'light' ? 'Karanlık Moda Geç' : 'Aydınlık Moda Geç' }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-main>
       <section
         id="anasayfa"
-        class="d-flex align-center justify-center text-center py-16 px-4"
+        class="d-flex align-center justify-center text-center py-16 px-4 text-white"
         style="
           background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.imgur.com/dfs5CM3.jpeg');
           background-size: cover;
           background-position: center;
           min-height: 80vh;
-          color: white;
           position: relative;
           overflow: hidden;
         "
@@ -93,22 +103,28 @@
         </v-container>
       </section>
 
-      <section id="hakkimda" class="py-12 px-4 grey lighten-5">
+      <section id="hakkimda" class="py-12 px-4" :class="hakkimdaBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Hakkımda</h2>
-          <v-row align="center">
-            <v-col class="text-center" cols="12" md="5">
-              <v-img alt="Hakkımda Görseli" class="rounded-lg elevation-6" src="https://i.imgur.com/iiRRaUk.jpeg" />
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Hakkımda</h2>
+          <v-row align="start">
+            <v-col class="text-center" cols="12" md="4">
+              <v-img
+                alt="Hakkımda Görseli"
+                aspect-ratio="auto"
+                class="rounded-lg elevation-6"
+                cover
+                src="https://i.imgur.com/iiRRaUk.jpeg"
+              />
             </v-col>
-            <v-col cols="12" md="6">
-              <p class="text-body-1 text-grey-darken-3">
+            <v-col class="d-flex flex-column justify-start" cols="12" md="7">
+              <p class="text-body-1 mb-2">
                 Bilgisayar Mühendisliği son sınıf öğrencisi olarak kariyerimde ölçeklenebilir, yüksek performanslı ve güvenilir yazılım sistemleri geliştirmeye odaklanmış bir profesyonel olmayı hedefliyorum. Özellikle hızlı API servisleri için Fastify ve modern veri tabanı çözümleri (örn. PostgreSQL, MongoDB) konusunda bilgi ve deneyim kazanmaya büyük önem veriyorum.
               </p>
-              <p class="text-body-1 text-grey-darken-3 mt-2">
+              <p class="text-body-1 mt-2 mb-4">
                 Eğitim sürecimde, algoritma tasarımından karmaşık sistem mimarilerine kadar geniş bir altyapı edindim. Bu süreçte, Polonya'da katıldığım Erasmus programı sayesinde hem kültürel birikimimi artırdım hem de İngilizce iletişim becerilerimi üst seviyeye taşıdım. Ön yüz teknolojilerine (Vue.js, TypeScript, Vuetify) olan ilgimi korurken, asıl tutkum karmaşık backend problemlerine efektif ve zarif çözümler sunmaktır. Sürekli öğrenmeye ve teknolojik gelişmeleri yakından takip etmeye olan inancımla, projelerime değer katmayı ve sektörde fark yaratmayı amaçlıyorum.
               </p>
 
-              <v-card class="pa-4 mt-6 elevation-2 rounded-lg" color="grey-lighten-4">
+              <v-card class="mt-auto pa-4 elevation-2 rounded-lg" :color="currentTheme === 'light' ? 'grey-lighten-4' : 'grey-darken-3'">
                 <v-list class="bg-transparent" dense>
                   <v-list-item>
                     <template #prepend><v-icon color="blue-darken-2">mdi-cake-variant</v-icon></template>
@@ -136,10 +152,9 @@
           </v-row>
         </v-container>
       </section>
-
-      <section id="yetenekler" class="py-12 px-4 blue-grey-lighten-5">
+      <section id="yetenekler" class="py-12 px-4" :class="yeteneklerBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Yetenekler</h2>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Yetenekler</h2>
           <v-row justify="center">
             <v-col
               v-for="(skill, i) in skills"
@@ -159,9 +174,9 @@
         </v-container>
       </section>
 
-      <section id="projeler" class="py-12 px-4 grey lighten-5">
+      <section id="projeler" class="py-12 px-4" :class="projelerBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Projeler</h2>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Projeler</h2>
           <v-row justify="center">
             <v-col
               v-for="(project, i) in projects"
@@ -187,9 +202,9 @@
         </v-container>
       </section>
 
-      <section id="egitim-tecrube" class="py-12 px-4 blue-grey-lighten-5">
+      <section id="egitim-tecrube" class="py-12 px-4" :class="egitimTecrubeBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Eğitim ve Tecrübelerim</h2>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Eğitim ve Tecrübelerim</h2>
 
           <h3 class="text-h5 text-md-h4 text-center mb-6 mt-10 font-weight-bold text-blue-darken-2">Eğitim</h3>
           <div v-if="!isMobile">
@@ -202,7 +217,7 @@
                 size="small"
               >
                 <template #opposite>
-                  <span class="font-weight-bold text-blue-grey-darken-3">{{ edu.date }}</span>
+                  <span class="font-weight-bold">{{ edu.date }}</span>
                 </template>
                 <v-card class="elevation-2 rounded-lg pa-4">
                   <v-card-title class="text-h6 font-weight-bold">{{ edu.degree }}</v-card-title>
@@ -227,7 +242,7 @@
                   <v-card-title class="text-h6 font-weight-bold">{{ edu.degree }}</v-card-title>
                   <v-card-subtitle class="text-body-2">{{ edu.institution }}</v-card-subtitle>
                   <v-card-text>
-                    <p class="text-caption font-weight-bold text-blue-grey-darken-3 mb-2">{{ edu.date }}</p>
+                    <p class="text-caption font-weight-bold mb-2">{{ edu.date }}</p>
                     <p>{{ edu.description }}</p>
                     <p v-if="edu.gpa" class="text-caption mt-2">GPA: {{ edu.gpa }}</p>
                   </v-card-text>
@@ -247,7 +262,7 @@
                 size="small"
               >
                 <template #opposite>
-                  <span class="font-weight-bold text-blue-grey-darken-3">{{ exp.date }}</span>
+                  <span class="font-weight-bold">{{ exp.date }}</span>
                 </template>
                 <v-card class="elevation-2 rounded-lg pa-4">
                   <v-card-title class="text-h6 font-weight-bold">{{ exp.position }}</v-card-title>
@@ -273,7 +288,7 @@
                   <v-card-title class="text-h6 font-weight-bold">{{ exp.position }}</v-card-title>
                   <v-card-subtitle class="text-body-2">{{ exp.company }}</v-card-subtitle>
                   <v-card-text>
-                    <p class="text-caption font-weight-bold text-blue-grey-darken-3 mb-2">{{ exp.date }}</p>
+                    <p class="text-caption font-weight-bold mb-2">{{ exp.date }}</p>
                     <ul class="ml-4">
                       <li v-for="(detail, index) in exp.details" :key="index" class="text-body-2 mb-1">- {{ detail }}</li>
                     </ul>
@@ -285,9 +300,9 @@
         </v-container>
       </section>
 
-      <section id="iletisim" class="py-12 px-4 blue-grey-darken-4 text-white">
+      <section id="iletisim" class="py-12 px-4" :class="iletisimBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Bana Ulaş</h2>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Bana Ulaş</h2>
           <v-row justify="center">
             <v-col cols="12" md="8">
               <v-card class="pa-6 elevation-6 rounded-lg">
@@ -301,7 +316,6 @@
                 >
                   <v-text-field
                     class="mb-4"
-                    dark
                     dense
                     label="Adınız Soyadınız"
                     name="name"
@@ -310,7 +324,6 @@
                   />
                   <v-text-field
                     class="mb-4"
-                    dark
                     dense
                     label="E-posta Adresiniz"
                     name="email"
@@ -320,7 +333,6 @@
                   />
                   <v-textarea
                     class="mb-4"
-                    dark
                     dense
                     label="Mesajınız"
                     name="message"
@@ -353,8 +365,8 @@
       </section>
     </v-main>
 
-    <v-footer color="blue-grey-darken-4" dark padless>
-      <v-col class="text-center white--text" cols="12">
+    <v-footer color="blue-grey-darken-4" padless>
+      <v-col class="text-center" cols="12">
         &copy; {{ new Date().getFullYear() }} — Tüm hakları saklıdır.
       </v-col>
     </v-footer>
@@ -362,13 +374,28 @@
 </template>
 
 <script setup>
-  import { onBeforeUnmount, onMounted, ref } from 'vue'
+  import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { useTheme } from 'vuetify'
 
   const drawer = ref(false)
   const isMobile = ref(false)
 
+  const theme = useTheme()
+  const currentTheme = computed(() => theme.global.name.value)
+
+  const toggleTheme = () => {
+    theme.global.name.value = currentTheme.value === 'light' ? 'dark' : 'light'
+  }
+
+  // Dinamik arka plan sınıfları
+  const hakkimdaBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
+  const yeteneklerBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
+  const projelerBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
+  const egitimTecrubeBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
+  const iletisimBgClass = computed(() => 'blue-grey-darken-4') // Sadeleştirildi
+
   const checkScreenSize = () => {
-    isMobile.value = window.innerWidth < 960 // Vuetify'ın 'md' breakpoint'i genellikle 960px'dir.
+    isMobile.value = window.innerWidth < 960
   }
 
   onMounted(() => {
@@ -380,7 +407,7 @@
     window.removeEventListener('resize', checkScreenSize)
   })
 
-  // Yetenekler verisi
+  // Yetenekler verisi (değişmedi)
   const skills = ref([
     {
       name: 'Vue.js',
@@ -439,7 +466,7 @@
     },
   ])
 
-  // Projeler verisi
+  // Projeler verisi (değişmedi)
   const projects = ref([
     {
       title: 'To-Do Web Application',
@@ -461,7 +488,7 @@
     },
   ])
 
-  // Eğitim verisi
+  // Eğitim verisi (değişmedi)
   const education = ref([
     {
       degree: 'Bilgisayar Mühendisliği Lisans',
@@ -488,7 +515,7 @@
     },
   ])
 
-  // Tecrübe verisi
+  // Tecrübe verisi (değişmedi)
   const experience = ref([
     {
       position: 'Intern Backend and Frontend Developer',
@@ -569,9 +596,6 @@ section {
   #anasayfa .v-btn {
     margin: 8px !important;
   }
-  /* Önceki denemeden kalan, artık gereksiz olan timeline CSS'lerini kaldırdık */
-  /* .v-timeline-item__opposite { display: none; } */
-  /* .v-timeline-item { padding-left: 20px !important; } */
 }
 
 /* Netlify Forms için gizli spam koruması */
