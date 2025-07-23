@@ -1,0 +1,591 @@
+<template>
+  <v-app>
+    <v-app-bar app color="blue-grey-darken-4" dark>
+      <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer" />
+
+      <v-toolbar-title class="font-weight-bold">AHMET YAVUZ</v-toolbar-title>
+      <v-spacer />
+
+      <div class="d-none d-md-flex">
+        <v-btn href="#anasayfa" text>Anasayfa</v-btn>
+        <v-btn href="#hakkimda" text>Hakkımda</v-btn>
+        <v-btn href="#yetenekler" text>Yetenekler</v-btn>
+        <v-btn href="#projeler" text>Projeler</v-btn>
+        <v-btn href="#egitim-tecrube" text>Eğitim & Tecrübe</v-btn>
+        <v-btn href="#iletisim" text>İletişim</v-btn>
+      </div>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" temporary>
+      <v-list nav>
+        <v-list-item href="#anasayfa" link @click="drawer = false">
+          <v-list-item-title>Anasayfa</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="#hakkimda" link @click="drawer = false">
+          <v-list-item-title>Hakkımda</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="#yetenekler" link @click="drawer = false">
+          <v-list-item-title>Yetenekler</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="#projeler" link @click="drawer = false">
+          <v-list-item-title>Projeler</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="#egitim-tecrube" link @click="drawer = false">
+          <v-list-item-title>Eğitim & Tecrübe</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="#iletisim" link @click="drawer = false">
+          <v-list-item-title>İletişim</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <section
+        id="anasayfa"
+        class="d-flex align-center justify-center text-center py-16 px-4"
+        style="
+          background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.imgur.com/dfs5CM3.jpeg');
+          background-size: cover;
+          background-position: center;
+          min-height: 80vh;
+          color: white;
+          position: relative;
+          overflow: hidden;
+        "
+      >
+        <v-container class="relative z-10">
+          <v-avatar class="mb-6 elevation-8" size="180">
+            <v-img alt="Ahmet Yavuz Profil Fotoğrafı" src="https://i.imgur.com/Rh17zDH.jpeg" />
+          </v-avatar>
+
+          <h1 class="text-h3 text-sm-h2 text-md-h1 font-weight-bold mb-4 animate__animated animate__fadeInDown">
+            Merhaba, Ben <span class="text-blue-lighten-2">Ahmet Yavuz</span>
+          </h1>
+          <h2 class="text-h6 text-sm-h5 font-weight-regular mx-auto mb-8 animate__animated animate__fadeInUp" style="max-width: 800px;">
+            Bilgisayar Mühendisliği son sınıf öğrencisiyim. Teorik bilgimi pratik projelerle pekiştirerek teknolojiye olan tutkumu somut çıktılara dönüştürmeyi hedefliyorum.
+          </h2>
+
+          <div class="d-flex justify-center flex-wrap gap-4 animate__animated animate__fadeInUp animate__delay-1s">
+            <v-btn
+              class="ma-2 text-none"
+              color="blue-lighten-2"
+              download="Ahmet_Yavuz_CV.pdf"
+              elevation="6"
+              href="https://drive.google.com/uc?export=download&id=1LwqTwRYc25fANyiIvK7fIAKlMjS_ARgH"
+              rounded
+              x-large
+            >
+              <v-icon start>mdi-download</v-icon> Özgeçmişim
+            </v-btn>
+
+            <v-btn
+              class="ma-2 text-none"
+              color="blue-darken-4"
+              elevation="6"
+              href="#iletisim"
+              outlined
+              rounded
+              x-large
+            >
+              <v-icon start>mdi-email</v-icon> Bana Ulaşın
+            </v-btn>
+          </div>
+        </v-container>
+      </section>
+
+      <section id="hakkimda" class="py-12 px-4 grey lighten-5">
+        <v-container>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Hakkımda</h2>
+          <v-row align="center">
+            <v-col class="text-center" cols="12" md="5">
+              <v-img alt="Hakkımda Görseli" class="rounded-lg elevation-6" src="https://i.imgur.com/iiRRaUk.jpeg" />
+            </v-col>
+            <v-col cols="12" md="6">
+              <p class="text-body-1 text-grey-darken-3">
+                Bilgisayar Mühendisliği son sınıf öğrencisi olarak kariyerimde ölçeklenebilir, yüksek performanslı ve güvenilir yazılım sistemleri geliştirmeye odaklanmış bir profesyonel olmayı hedefliyorum. Özellikle hızlı API servisleri için Fastify ve modern veri tabanı çözümleri (örn. PostgreSQL, MongoDB) konusunda bilgi ve deneyim kazanmaya büyük önem veriyorum.
+              </p>
+              <p class="text-body-1 text-grey-darken-3 mt-2">
+                Eğitim sürecimde, algoritma tasarımından karmaşık sistem mimarilerine kadar geniş bir altyapı edindim. Bu süreçte, Polonya'da katıldığım Erasmus programı sayesinde hem kültürel birikimimi artırdım hem de İngilizce iletişim becerilerimi üst seviyeye taşıdım. Ön yüz teknolojilerine (Vue.js, TypeScript, Vuetify) olan ilgimi korurken, asıl tutkum karmaşık backend problemlerine efektif ve zarif çözümler sunmaktır. Sürekli öğrenmeye ve teknolojik gelişmeleri yakından takip etmeye olan inancımla, projelerime değer katmayı ve sektörde fark yaratmayı amaçlıyorum.
+              </p>
+
+              <v-card class="pa-4 mt-6 elevation-2 rounded-lg" color="grey-lighten-4">
+                <v-list class="bg-transparent" dense>
+                  <v-list-item>
+                    <template #prepend><v-icon color="blue-darken-2">mdi-cake-variant</v-icon></template>
+                    <v-list-item-title class="font-weight-medium">Doğum Tarihi:</v-list-item-title>
+                    <v-list-item-subtitle>03 Kasım 2000</v-list-item-subtitle>
+                  </v-list-item>
+                  <v-list-item>
+                    <template #prepend><v-icon color="blue-darken-2">mdi-map-marker</v-icon></template>
+                    <v-list-item-title class="font-weight-medium">Yaşadığı Şehir:</v-list-item-title>
+                    <v-list-item-subtitle>Ankara</v-list-item-subtitle>
+                  </v-list-item>
+                  <v-list-item href="mailto:yavuzahmet703@gmail.com">
+                    <template #prepend><v-icon color="blue-darken-2">mdi-email</v-icon></template>
+                    <v-list-item-title class="font-weight-medium">E-Mail:</v-list-item-title>
+                    <v-list-item-subtitle>yavuzahmet703@gmail.com</v-list-item-subtitle>
+                  </v-list-item>
+                  <v-list-item>
+                    <template #prepend><v-icon color="blue-darken-2">mdi-shield-account</v-icon></template>
+                    <v-list-item-title class="font-weight-medium">Askerlik Durumu:</v-list-item-title>
+                    <v-list-item-subtitle>Tecilli (31/12/2028)</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="yetenekler" class="py-12 px-4 blue-grey-lighten-5">
+        <v-container>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Yetenekler</h2>
+          <v-row justify="center">
+            <v-col
+              v-for="(skill, i) in skills"
+              :key="i"
+              cols="12"
+              lg="3"
+              md="4"
+              sm="6"
+            >
+              <v-card class="pa-4 text-center elevation-4 rounded-lg">
+                <v-icon color="blue-darken-2" size="60">{{ skill.icon }}</v-icon>
+                <v-card-title class="justify-center text-h6 font-weight-bold">{{ skill.name }}</v-card-title>
+                <v-card-text>{{ skill.description }}</v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="projeler" class="py-12 px-4 grey lighten-5">
+        <v-container>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Projeler</h2>
+          <v-row justify="center">
+            <v-col
+              v-for="(project, i) in projects"
+              :key="i"
+              cols="12"
+              lg="4"
+              md="6"
+            >
+              <v-card class="elevation-4 rounded-lg">
+                <v-img cover height="200px" :src="project.image" />
+                <v-card-title class="font-weight-bold">{{ project.title }}</v-card-title>
+                <v-card-text>
+                  {{ project.description }}
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn color="blue-darken-2" :href="project.link" target="_blank" text>
+                    Görüntüle <v-icon right>mdi-link</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <section id="egitim-tecrube" class="py-12 px-4 blue-grey-lighten-5">
+        <v-container>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Eğitim ve Tecrübelerim</h2>
+
+          <h3 class="text-h5 text-md-h4 text-center mb-6 mt-10 font-weight-bold text-blue-darken-2">Eğitim</h3>
+          <div v-if="!isMobile">
+            <v-timeline align="start" class="mb-10" side="end">
+              <v-timeline-item
+                v-for="(edu, i) in education"
+                :key="i"
+                :dot-color="edu.color"
+                icon="mdi-school"
+                size="small"
+              >
+                <template #opposite>
+                  <span class="font-weight-bold text-blue-grey-darken-3">{{ edu.date }}</span>
+                </template>
+                <v-card class="elevation-2 rounded-lg pa-4">
+                  <v-card-title class="text-h6 font-weight-bold">{{ edu.degree }}</v-card-title>
+                  <v-card-subtitle class="text-body-2">{{ edu.institution }}</v-card-subtitle>
+                  <v-card-text>
+                    <p>{{ edu.description }}</p>
+                    <p v-if="edu.gpa" class="text-caption mt-2">GPA: {{ edu.gpa }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
+          </div>
+
+          <div v-else>
+            <v-row justify="center">
+              <v-col
+                v-for="(edu, i) in education"
+                :key="i"
+                cols="12"
+              >
+                <v-card class="elevation-2 rounded-lg pa-4 mb-4">
+                  <v-card-title class="text-h6 font-weight-bold">{{ edu.degree }}</v-card-title>
+                  <v-card-subtitle class="text-body-2">{{ edu.institution }}</v-card-subtitle>
+                  <v-card-text>
+                    <p class="text-caption font-weight-bold text-blue-grey-darken-3 mb-2">{{ edu.date }}</p>
+                    <p>{{ edu.description }}</p>
+                    <p v-if="edu.gpa" class="text-caption mt-2">GPA: {{ edu.gpa }}</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
+
+          <h3 class="text-h5 text-md-h4 text-center mb-6 mt-10 font-weight-bold text-blue-darken-2">Tecrübe</h3>
+          <div v-if="!isMobile">
+            <v-timeline align="start" side="end">
+              <v-timeline-item
+                v-for="(exp, i) in experience"
+                :key="i"
+                :dot-color="exp.color"
+                icon="mdi-briefcase"
+                size="small"
+              >
+                <template #opposite>
+                  <span class="font-weight-bold text-blue-grey-darken-3">{{ exp.date }}</span>
+                </template>
+                <v-card class="elevation-2 rounded-lg pa-4">
+                  <v-card-title class="text-h6 font-weight-bold">{{ exp.position }}</v-card-title>
+                  <v-card-subtitle class="text-body-2">{{ exp.company }}</v-card-subtitle>
+                  <v-card-text>
+                    <ul class="ml-4">
+                      <li v-for="(detail, index) in exp.details" :key="index" class="text-body-2 mb-1">- {{ detail }}</li>
+                    </ul>
+                  </v-card-text>
+                </v-card>
+              </v-timeline-item>
+            </v-timeline>
+          </div>
+
+          <div v-else>
+            <v-row justify="center">
+              <v-col
+                v-for="(exp, i) in experience"
+                :key="i"
+                cols="12"
+              >
+                <v-card class="elevation-2 rounded-lg pa-4 mb-4">
+                  <v-card-title class="text-h6 font-weight-bold">{{ exp.position }}</v-card-title>
+                  <v-card-subtitle class="text-body-2">{{ exp.company }}</v-card-subtitle>
+                  <v-card-text>
+                    <p class="text-caption font-weight-bold text-blue-grey-darken-3 mb-2">{{ exp.date }}</p>
+                    <ul class="ml-4">
+                      <li v-for="(detail, index) in exp.details" :key="index" class="text-body-2 mb-1">- {{ detail }}</li>
+                    </ul>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
+        </v-container>
+      </section>
+
+      <section id="iletisim" class="py-12 px-4 blue-grey-darken-4 text-white">
+        <v-container>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold text-blue-grey-darken-4">Bana Ulaş</h2>
+          <v-row justify="center">
+            <v-col cols="12" md="8">
+              <v-card class="pa-6 elevation-6 rounded-lg">
+                <form
+                  action="/tesekkurler"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  method="POST"
+                  name="contact"
+                  @submit.prevent="submitForm"
+                >
+                  <v-text-field
+                    class="mb-4"
+                    dark
+                    dense
+                    label="Adınız Soyadınız"
+                    name="name"
+                    outlined
+                    required
+                  />
+                  <v-text-field
+                    class="mb-4"
+                    dark
+                    dense
+                    label="E-posta Adresiniz"
+                    name="email"
+                    outlined
+                    required
+                    type="email"
+                  />
+                  <v-textarea
+                    class="mb-4"
+                    dark
+                    dense
+                    label="Mesajınız"
+                    name="message"
+                    outlined
+                    required
+                    rows="5"
+                  />
+                  <v-btn block color="blue-darken-2" large type="submit">
+                    Mesaj Gönder <v-icon right>mdi-send</v-icon>
+                  </v-btn>
+                </form>
+              </v-card>
+            </v-col>
+          </v-row>
+          <div class="text-center mt-8">
+            <v-btn class="mx-2" href="https://www.instagram.com/imahmetyavuz/" icon>
+              <v-icon size="36">mdi-instagram</v-icon>
+            </v-btn>
+            <v-btn class="mx-2" href="https://www.linkedin.com/in/ahmet-yavuz-35301224b/" icon target="_blank">
+              <v-icon size="36">mdi-linkedin</v-icon>
+            </v-btn>
+            <v-btn class="mx-2" href="https://github.com/AhmetYavuz0/" icon target="_blank">
+              <v-icon size="36">mdi-github</v-icon>
+            </v-btn>
+            <v-btn class="mx-2" href="mailto:yavuzahmet703@gmail.com" icon>
+              <v-icon size="36">mdi-email</v-icon>
+            </v-btn>
+          </div>
+        </v-container>
+      </section>
+    </v-main>
+
+    <v-footer color="blue-grey-darken-4" dark padless>
+      <v-col class="text-center white--text" cols="12">
+        &copy; {{ new Date().getFullYear() }} — Tüm hakları saklıdır.
+      </v-col>
+    </v-footer>
+  </v-app>
+</template>
+
+<script setup>
+  import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+  const drawer = ref(false)
+  const isMobile = ref(false)
+
+  const checkScreenSize = () => {
+    isMobile.value = window.innerWidth < 960 // Vuetify'ın 'md' breakpoint'i genellikle 960px'dir.
+  }
+
+  onMounted(() => {
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+  })
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', checkScreenSize)
+  })
+
+  // Yetenekler verisi
+  const skills = ref([
+    {
+      name: 'Vue.js',
+      icon: 'mdi-vuejs',
+      description: 'Modern ve reaktif web uygulamaları geliştirme',
+    },
+    {
+      name: 'TypeScript',
+      icon: 'mdi-language-typescript',
+      description: 'Güvenli ve ölçeklenebilir kod yazma',
+    },
+    {
+      name: 'HTML & CSS',
+      icon: 'mdi-language-html5',
+      description: 'Web sayfaları tasarlama ve stilize etme',
+    },
+    {
+      name: 'Fastify',
+      icon: 'mdi-lightning-bolt',
+      description: 'Hızlı ve düşük maliyetli API geliştirme',
+    },
+    {
+      name: '.NET Core',
+      icon: 'mdi-language-csharp',
+      description: 'Çapraz platform uygulamalar geliştirme',
+    },
+    {
+      name: 'Entity Framework',
+      icon: 'mdi-database-search',
+      description: 'Veri tabanı ile nesne ilişkisel eşleme (ORM)',
+    },
+    {
+      name: 'Drizzle ORM',
+      icon: 'mdi-code-braces',
+      description: 'TypeScript/JavaScript için modern ve tipli ORM çözümü',
+    },
+    {
+      name: 'Docker',
+      icon: 'mdi-docker',
+      description: 'Uygulama kapsülleme ve dağıtımı',
+    },
+    {
+      name: 'Veritabanları',
+      icon: 'mdi-database',
+      description: 'Veritabanı tasarımı ve yönetimi',
+    },
+    {
+      name: 'Git & GitHub',
+      icon: 'mdi-git',
+      description: 'Versiyon kontrolü ve işbirliği',
+    },
+    {
+      name: 'İleri Seviye İngilizce',
+      icon: 'mdi-translate',
+      description: 'İletişim ve teknik dokümantasyon için akıcı İngilizce bilgisi.',
+    },
+  ])
+
+  // Projeler verisi
+  const projects = ref([
+    {
+      title: 'To-Do Web Application',
+      description: 'Kullanıcıların kişisel görevlerini güvenli bir şekilde yönetebileceği, TypeScript ile geliştirilmiş tam teşekküllü bir web uygulamasıdır. JWT tabanlı kimlik doğrulama ile kullanıcı kaydı ve güvenli oturum yönetimi sunan bu proje, giriş yapan kullanıcılara kendi görevlerini ekleme, silme ve düzenleme imkanı tanır. Bu uygulama, modern web geliştirme ve güvenli backend mimarisi yeteneklerimi sergilemektedir.',
+      image: 'https://i.imgur.com/bHM7XyW.jpeg',
+      link: 'https://github.com/AhmetYavuz0/ToDo-App',
+    },
+    {
+      title: 'KriptoMatris',
+      description: ' Üniversite eğitimimin ilk yılında C programlama diliyle geliştirdiğim bu uygulama, matris operasyonları aracılığıyla temel bir şifreleme algoritması uygulamaktadır. Bu proje, algoritma tasarım ve problem çözme becerilerimi geliştirmeye odaklandığım önemli bir adımdı ve bilgisayar bilimleri temellerine olan ilgimi yansıtmaktadır.',
+      image: 'https://i.imgur.com/0SG1WkA.jpeg',
+      link: 'https://github.com/AhmetYavuz0/Sifre-olustucu-cozucu',
+    },
+    {
+      title: 'Spelling Bee Game',
+      description: 'JavaFX kullanarak geliştirdiğim bu interaktif Spelling Bee oyunu, kullanıcıların kelime dağarcığını ve yazım becerilerini geliştirmeyi amaçlamaktadır. Proje, grafiksel kullanıcı arayüzü (GUI) tasarımı ve oyun mantığı geliştirme konusundaki yeteneklerimi sergilerken, aynı zamanda kullanıcı etkileşimli uygulamalar oluşturma deneyimimi pekiştirdi.',
+      image: 'https://i.imgur.com/Xi4OqLJ.png',
+      link: 'https://github.com/AhmetYavuz0/Spelling-bee-Game',
+    },
+  ])
+
+  // Eğitim verisi
+  const education = ref([
+    {
+      degree: 'Bilgisayar Mühendisliği Lisans',
+      institution: 'Erciyes Üniversitesi',
+      date: 'Eylül 2020 - Devam Ediyor',
+      description: 'Yazılım geliştirme, algoritma analizi ve veri tabanı tasarımı üzerine odaklanma.',
+      gpa: '2.95/4.00',
+      color: 'deep-purple-lighten-2',
+    },
+    {
+      degree: 'İngilizce Hazırlık Diploması',
+      institution: 'Erciyes Üniversitesi',
+      date: 'Eylül 2019 - Haziran 2020',
+      description: 'B2 Seviye İngilizce Eğitimi',
+      gpa: '87/100',
+      color: 'deep-purple-lighten-2',
+    },
+    {
+      degree: 'Lise Diploması',
+      institution: 'Final Anadolu Lisesi',
+      date: 'Eylül 2018 - Haziran 2019',
+      description: 'Fen bilimleri ve matematik ağırlıklı eğitim.',
+      color: 'deep-purple-lighten-3',
+    },
+  ])
+
+  // Tecrübe verisi
+  const experience = ref([
+    {
+      position: 'Intern Backend and Frontend Developer',
+      company: 'Ekinoks Software',
+      date: 'Şubat 2025 - Mart 2025',
+      details: [
+        'Node.js (Fastify) kullanarak yüksek performanslı API servisleri geliştirme.',
+        'PostgreSQL veritabanı ile verimli veri yönetimi ve sorgu optimizasyonu yapma.',
+        'Docker ile uygulama kapsülleme ve dağıtım süreçlerine destek olma.',
+        'JWT kullanarak authorization işlemlerini kontrol etme.',
+      ],
+      color: 'blue-lighten-2',
+    },
+  ])
+
+  const submitForm = event => {
+    alert('Mesajınız gönderiliyor... (Netlify Formlar otomatik işleyecek)')
+  }
+</script>
+
+<style scoped>
+/* Genel stil düzenlemeleri */
+section {
+  display: flex;
+  align-items: center;
+}
+
+/* AppBar butonları için daha yumuşak geçiş */
+.v-btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.v-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Anasayfa arka planı için opaklık */
+#anasayfa {
+  position: relative;
+  overflow: hidden;
+  min-height: 80vh;
+}
+
+#anasayfa::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+#anasayfa .v-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hakkımda bölümü için görsel placeholder'ı biraz daha iyi hale getirdim */
+#hakkimda .v-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobil uyumluluk için font boyutları */
+@media (max-width: 960px) {
+  .v-app-bar .v-toolbar-title {
+    font-size: 1.25rem !important;
+  }
+  #anasayfa h1 {
+    font-size: 2.5rem !important;
+  }
+  #anasayfa h2 {
+    font-size: 1.1rem !important;
+  }
+  #anasayfa .v-btn {
+    margin: 8px !important;
+  }
+  /* Önceki denemeden kalan, artık gereksiz olan timeline CSS'lerini kaldırdık */
+  /* .v-timeline-item__opposite { display: none; } */
+  /* .v-timeline-item { padding-left: 20px !important; } */
+}
+
+/* Netlify Forms için gizli spam koruması */
+.hidden {
+  display: none !important;
+}
+
+/* Timeline maddelerindeki liste stili */
+.v-timeline-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.v-timeline-item ul li {
+  margin-bottom: 5px;
+}
+</style>
