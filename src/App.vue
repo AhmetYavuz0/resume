@@ -307,7 +307,7 @@
             <v-btn class="mx-2" href="https://www.instagram.com/imahmetyavuz/" icon>
               <v-icon size="36">mdi-instagram</v-icon>
             </v-btn>
-            <v-btn class="mx-2" href="https://www.linkedin.com/in/ahmet-yavuz-35301224b/" icon target="_blank">
+            <v-btn class="mx-2" href="https://www.linkedin.com/in/dev-ahmet-yavuz/" icon target="_blank">
               <v-icon size="36">mdi-linkedin</v-icon>
             </v-btn>
             <v-btn class="mx-2" href="https://github.com/AhmetYavuz0/" icon target="_blank">
