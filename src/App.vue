@@ -128,22 +128,22 @@
                 <v-list class="bg-transparent" dense>
                   <v-list-item>
                     <template #prepend><v-icon color="blue-darken-2">mdi-cake-variant</v-icon></template>
-                    <v-list-item-title class="font-weight-medium">Doğum Tarihi:</v-list-item-title>
+                    <v-list-item-title class="font-weight-medium">Doğum Tarihim:</v-list-item-title>
                     <v-list-item-subtitle>03 Kasım 2000</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item>
                     <template #prepend><v-icon color="blue-darken-2">mdi-map-marker</v-icon></template>
-                    <v-list-item-title class="font-weight-medium">Yaşadığı Şehir:</v-list-item-title>
+                    <v-list-item-title class="font-weight-medium">Yaşadığım Şehir:</v-list-item-title>
                     <v-list-item-subtitle>Ankara</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item href="mailto:yavuzahmet703@gmail.com">
                     <template #prepend><v-icon color="blue-darken-2">mdi-email</v-icon></template>
-                    <v-list-item-title class="font-weight-medium">E-Mail:</v-list-item-title>
+                    <v-list-item-title class="font-weight-medium">E-Mail Adresim:</v-list-item-title>
                     <v-list-item-subtitle>yavuzahmet703@gmail.com</v-list-item-subtitle>
                   </v-list-item>
                   <v-list-item>
                     <template #prepend><v-icon color="blue-darken-2">mdi-shield-account</v-icon></template>
-                    <v-list-item-title class="font-weight-medium">Askerlik Durumu:</v-list-item-title>
+                    <v-list-item-title class="font-weight-medium">Askerlik Durumum:</v-list-item-title>
                     <v-list-item-subtitle>Tecilli (31/12/2028)</v-list-item-subtitle>
                   </v-list-item>
                 </v-list>
