@@ -121,7 +121,7 @@
                 Bilgisayar Mühendisliği son sınıf öğrencisi olarak kariyerimde ölçeklenebilir, yüksek performanslı ve güvenilir yazılım sistemleri geliştirmeye odaklanmış bir profesyonel olmayı hedefliyorum. Özellikle hızlı API servisleri için Fastify ve modern veri tabanı çözümleri (örn. PostgreSQL, MongoDB) konusunda bilgi ve deneyim kazanmaya büyük önem veriyorum.
               </p>
               <p class="text-body-1 mt-2 mb-4">
-                Eğitim sürecimde, algoritma tasarımından karmaşık sistem mimarilerine kadar geniş bir altyapı edindim. Bu süreçte, Polonya'da katıldığım Erasmus programı sayesinde hem kültürel birikimimi artırdım hem de İngilizce iletişim becerilerimi üst seviyeye taşıdım. Ön yüz teknolojilerine (Vue.js, TypeScript, Vuetify) olan ilgimi korurken, asıl tutkum karmaşık backend problemlerine efektif ve zarif çözümler sunmaktır. Sürekli öğrenmeye ve teknolojik gelişmeleri yakından takip etmeye olan inancımla, projelerime değer katmayı ve sektörde fark yaratmayı amaçlıyorum.
+                Eğitim sürecimde, Polonya'da katıldığım Erasmus programı sayesinde hem kültürel birikimimi artırdım hem de İngilizce iletişim becerilerimi üst seviyeye taşıdım. Ön yüz teknolojilerine (Vue.js, TypeScript, Vuetify) olan ilgimi korurken, asıl tutkum karmaşık backend problemlerine efektif ve zarif çözümler sunmaktır. Sürekli öğrenmeye ve teknolojik gelişmeleri yakından takip etmeye olan inancımla, projelerime değer katmayı ve sektörde fark yaratmayı amaçlıyorum.
               </p>
 
               <v-card class="mt-auto pa-4 elevation-2 rounded-lg" :color="currentTheme === 'light' ? 'grey-lighten-4' : 'grey-darken-3'">
@@ -302,19 +302,25 @@
 
       <section id="iletisim" class="py-12 px-4" :class="iletisimBgClass">
         <v-container>
-          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Bana Ulaş</h2>
+          <h2 class="text-h4 text-md-h3 text-center mb-8 font-weight-bold">Bana Ulaşın</h2>
           <v-row justify="center">
             <v-col cols="12" md="8">
               <v-card class="pa-6 elevation-6 rounded-lg">
                 <form
-                  action="/tesekkurler"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
-                  method="POST"
                   name="contact"
                   @submit.prevent="submitForm"
                 >
+                  <input name="form-name" type="hidden" value="contact">
+                  <p style="display: none;">
+                    <label>
+                      Bu alanı doldurmayın eğer insansanız: <input name="bot-field">
+                    </label>
+                  </p>
+
                   <v-text-field
+                    v-model="formData.name"
                     class="mb-4"
                     dense
                     label="Adınız Soyadınız"
@@ -323,6 +329,7 @@
                     required
                   />
                   <v-text-field
+                    v-model="formData.email"
                     class="mb-4"
                     dense
                     label="E-posta Adresiniz"
@@ -332,6 +339,7 @@
                     type="email"
                   />
                   <v-textarea
+                    v-model="formData.message"
                     class="mb-4"
                     dense
                     label="Mesajınız"
@@ -340,7 +348,13 @@
                     required
                     rows="5"
                   />
-                  <v-btn block color="blue-darken-2" large type="submit">
+                  <v-btn
+                    block
+                    color="blue-darken-2"
+                    large
+                    :loading="loading"
+                    type="submit"
+                  >
                     Mesaj Gönder <v-icon right>mdi-send</v-icon>
                   </v-btn>
                 </form>
@@ -361,6 +375,26 @@
               <v-icon size="36">mdi-email</v-icon>
             </v-btn>
           </div>
+
+          <v-snackbar
+            v-model="snackbar.show"
+            :color="snackbar.color"
+            right
+            timeout="5000"
+            top
+          >
+            {{ snackbar.message }}
+            <template #action="{ attrs }">
+              <v-btn
+                color="white"
+                text
+                v-bind="attrs"
+                @click="snackbar.show = false"
+              >
+                Kapat
+              </v-btn>
+            </template>
+          </v-snackbar>
         </v-container>
       </section>
     </v-main>
@@ -531,8 +565,56 @@
     },
   ])
 
-  const submitForm = event => {
-    alert('Mesajınız gönderiliyor... (Netlify Formlar otomatik işleyecek)')
+  // --- Netlify Form İşlemleri İçin Yeni Kod ---
+  const formData = ref({
+    name: '',
+    email: '',
+    message: '',
+  })
+  const loading = ref(false)
+  const snackbar = ref({
+    show: false,
+    message: '',
+    color: '',
+  })
+
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&')
+  }
+
+  const submitForm = async () => {
+    loading.value = true // Butonu yükleme durumuna getir
+    try {
+      // Formda action="/tesekkurler" yerine fetch ile Netlify'ye POST yapıyoruz
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact', // Bu önemli! Formun adı
+          ...formData.value,
+        }),
+      })
+
+      // Başarılı bildirim
+      snackbar.value.message = 'Mesajınız başarıyla gönderildi!'
+      snackbar.value.color = 'success'
+      snackbar.value.show = true
+
+      // Formu temizle
+      formData.value.name = ''
+      formData.value.email = ''
+      formData.value.message = ''
+    } catch (error) {
+      console.error('Form gönderilirken hata oluştu:', error)
+      // Hata bildirimi
+      snackbar.value.message = 'Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.'
+      snackbar.value.color = 'error'
+      snackbar.value.show = true
+    } finally {
+      loading.value = false // Butonu normal durumuna getir
+    }
   }
 </script>
 
@@ -599,6 +681,7 @@ section {
 }
 
 /* Netlify Forms için gizli spam koruması */
+/* Bu sınıfı, formdaki gizli bot-field P etiketine uygulayabilirsin */
 .hidden {
   display: none !important;
 }
