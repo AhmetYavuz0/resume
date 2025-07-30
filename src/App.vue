@@ -81,7 +81,7 @@
               color="blue-lighten-2"
               download="Ahmet_Yavuz_CV.pdf"
               elevation="6"
-              href="https://drive.google.com/uc?export=download&id=1LwqTwRYc25fANyiIvK7fIAKlMjS_ARH"
+              href="https://download1072.mediafire.com/49orgffk4dkgOs8-tEd-FstgOYKfmtt18Lg7wRe-wuI_FIK5uuHZLVV-iHV2DQs1yeuay7vBZQM44Q_Tw9gikaRViK0YiVj4B5n-SInsBxsADgxekCHAwDjnBTCimaxmJJV-43ERGCn7MXBOdhhiJfEMWWt0Yk3GG5qf4hoPgYhm/6cddf2696wfvytz/Ahmet-Yavuz-CV.pdf"
               rounded
               x-large
             >
