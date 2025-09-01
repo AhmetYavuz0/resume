@@ -4,12 +4,15 @@
   </v-app>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
   import { onMounted } from 'vue'
 
-  // Fonksiyonun döndüreceği verinin yeni ve daha basit tipini tanımla
+  // Geri dönen verinin tipini güncelle
   interface VisitorInfo {
     ip: string
+    country: string
+    city: string
+    isp: string
   }
 
   const fetchVisitorInfo = async () => {
@@ -20,16 +23,16 @@
       }
       const data: VisitorInfo = await response.json()
 
-      // Sadece IP adresini konsola yazdır
-      console.log('Ziyaretçi IP Adresi:', data.ip)
+      // Konsolda yeni verileri göster
+      console.log('Ziyaretçi Bilgileri:', data)
+      console.log('IP Adresi:', data.ip)
+      console.log('Şehir:', data.city)
     } catch (error) {
       console.error('API çağrısı başarısız oldu:', error)
     }
   }
 
-  // Bileşen yüklendiğinde (mounted) fonksiyonu çağır
   onMounted(() => {
     fetchVisitorInfo()
   })
-
 </script>
