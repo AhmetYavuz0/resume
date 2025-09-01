@@ -30,6 +30,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
     // 2. IP adresine göre konum bilgisi almak için 3. parti API'ye istek gönder
     const ipApiUrl = `http://ip-api.com/json/${ip}`
+    console.log('ip api url', ipApiUrl)
     const response = await fetch(ipApiUrl)
 
     if (!response.ok) {
