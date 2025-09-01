@@ -1,9 +1,10 @@
 // netlify/functions/get-info.ts
 
+// Netlify'ın tip tanımlamalarını ve fetch API'sini içe aktarırız
 import type { Handler, HandlerContext, HandlerEvent } from '@netlify/functions'
-import fetch from 'node-fetch' // node-fetch'i yüklemen gerekebilir: npm install node-fetch
+import fetch from 'node-fetch'
 
-// Geri döndürülecek verinin tipini tanımlayalım
+// Geri dönecek olan verinin yapısını (tipini) tanımlarız
 interface VisitorInfo {
   ip: string
   device: string
@@ -16,33 +17,37 @@ interface VisitorInfo {
   timestamp: string
 }
 
+// Netlify fonksiyonunun ana işlevini tanımlayan handler
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   try {
-    // 1. Kullanıcının IP adresini al
-    const ip = event.headers['client-ip']
+    // 1. Ziyaretçinin IP adresini alırız.
+    // Eğer bir nedenle IP adresi alınamazsa 'unknown' olarak ayarlarız.
+    const ip = event.headers['client-ip'] || 'unknown'
 
-    if (!ip) {
+    // Güvenlik: Eğer IP adresi bilinmiyorsa ve devam etmek istemiyorsan, burada hata döndürebilirsin.
+    // Ancak bu, yerel geliştirme ortamında 400 hatası vermesini engeller.
+    if (ip === 'unknown') {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'IP adresi bulunamadı.' }),
       }
     }
 
-    // 2. IP adresine göre konum bilgisi almak için 3. parti API'ye istek gönder
+    // 2. IP adresini kullanarak konum bilgilerini almak için üçüncü taraf bir API'ye istek göndeririz.
+    // Bu API, IP adresine bağlı coğrafi verileri sağlar.
     const ipApiUrl = `http://ip-api.com/json/${ip}`
-    console.log('ip api url', ipApiUrl)
     const response = await fetch(ipApiUrl)
 
     if (!response.ok) {
       throw new Error(`API isteği başarısız oldu: ${response.statusText}`)
     }
 
-    const data = await response.json() as any // Gelen JSON verisini any olarak kabul edelim
+    const data = await response.json() as any // Gelen veriyi geçici olarak 'any' olarak işaretleriz
 
-    // 3. Kullanıcının cihaz bilgisini (User-Agent) al
+    // 3. Ziyaretçinin cihaz bilgilerini (User-Agent) alırız.
     const userAgent = event.headers['user-agent'] || 'Bilinmiyor'
 
-    // Verileri tanımladığımız tip ile eşleştirerek geri döndürülecek objeyi oluştur
+    // 4. Tüm bilgileri bir araya getirip, 'VisitorInfo' tipine uygun bir obje oluştururuz.
     const visitorInfo: VisitorInfo = {
       ip,
       device: userAgent,
@@ -55,12 +60,13 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
       timestamp: new Date().toISOString(),
     }
 
-    // Fonksiyon başarılı olursa, 200 kodu ve veriyi döndür
+    // 5. Başarılı bir şekilde topladığımız veriyi, 200 durum kodu ile JSON formatında geri döndürürüz.
     return {
       statusCode: 200,
       body: JSON.stringify(visitorInfo),
     }
   } catch (error) {
+    // 6. İşlem sırasında herhangi bir hata oluşursa, bunu yakalayıp 500 durum kodu ile döndürürüz.
     console.error('Fonksiyon hatası:', error)
     return {
       statusCode: 500,
@@ -69,4 +75,5 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 }
 
+// Netlify'ın bu fonksiyonu tanıması için dışa aktarırız
 export { handler }
