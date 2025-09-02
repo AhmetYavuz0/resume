@@ -10,7 +10,7 @@
 
   onMounted(async () => {
     try {
-      const res = await axios.get('http://45.87.173.246:8080/log-visit')
+      const res = await axios.get('https://api.ahmet-yavuz/log-visit')
       console.log('Ziyaret loglandı:', res.data)
     } catch (error) {
       console.error('Hata oluştu:', error)
