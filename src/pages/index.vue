@@ -339,162 +339,162 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useTheme } from 'vuetify'
+  import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+  import { useTheme } from 'vuetify'
 
-const drawer = ref(false)
-const isMobile = ref(false)
+  const drawer = ref(false)
+  const isMobile = ref(false)
 
-const theme = useTheme()
-const currentTheme = computed(() => theme.global.name.value)
+  const theme = useTheme()
+  const currentTheme = computed(() => theme.global.name.value)
 
-const toggleTheme = () => {
-  theme.global.name.value = currentTheme.value === 'light' ? 'dark' : 'light'
-}
+  const toggleTheme = () => {
+    theme.global.name.value = currentTheme.value === 'light' ? 'dark' : 'light'
+  }
 
-// Dinamik arka plan sınıfları
-const hakkimdaBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
-const yeteneklerBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
-const projelerBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
-const egitimTecrubeBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
-const iletisimBgClass = computed(() => 'blue-grey-darken-4') // Sadeleştirildi
+  // Dinamik arka plan sınıfları
+  const hakkimdaBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
+  const yeteneklerBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
+  const projelerBgClass = computed(() => currentTheme.value === 'light' ? 'grey lighten-5' : 'grey darken-4')
+  const egitimTecrubeBgClass = computed(() => currentTheme.value === 'light' ? 'blue-grey-lighten-5' : 'blue-grey-darken-3')
+  const iletisimBgClass = computed(() => 'blue-grey-darken-4') // Sadeleştirildi
 
-const checkScreenSize = () => {
-  isMobile.value = window.innerWidth < 960
-}
+  const checkScreenSize = () => {
+    isMobile.value = window.innerWidth < 960
+  }
 
-onMounted(() => {
-  checkScreenSize()
-  window.addEventListener('resize', checkScreenSize)
-})
+  onMounted(() => {
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+  })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkScreenSize)
-})
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', checkScreenSize)
+  })
 
-// Yetenekler verisi (değişmedi)
-const skills = ref([
-  {
-    name: 'Vue.js',
-    icon: 'mdi-vuejs',
-    description: 'Modern ve reaktif web uygulamaları geliştirme',
-  },
-  {
-    name: 'TypeScript',
-    icon: 'mdi-language-typescript',
-    description: 'Güvenli ve ölçeklenebilir kod yazma',
-  },
-  {
-    name: 'HTML & CSS',
-    icon: 'mdi-language-html5',
-    description: 'Web sayfaları tasarlama ve stilize etme',
-  },
-  {
-    name: 'Fastify',
-    icon: 'mdi-lightning-bolt',
-    description: 'Hızlı ve düşük maliyetli API geliştirme',
-  },
-  {
-    name: '.NET Core',
-    icon: 'mdi-language-csharp',
-    description: 'Çapraz platform uygulamalar geliştirme',
-  },
-  {
-    name: 'Entity Framework',
-    icon: 'mdi-database-search',
-    description: 'Veri tabanı ile nesne ilişkisel eşleme (ORM)',
-  },
-  {
-    name: 'Drizzle ORM',
-    icon: 'mdi-code-braces',
-    description: 'TypeScript/JavaScript için modern ve tipli ORM çözümü',
-  },
-  {
-    name: 'Docker',
-    icon: 'mdi-docker',
-    description: 'Uygulama kapsülleme ve dağıtımı',
-  },
-  {
-    name: 'Veritabanları',
-    icon: 'mdi-database',
-    description: 'Veritabanı tasarımı ve yönetimi',
-  },
-  {
-    name: 'Git & GitHub',
-    icon: 'mdi-git',
-    description: 'Versiyon kontrolü ve işbirliği',
-  },
-  {
-    name: 'İleri Seviye İngilizce',
-    icon: 'mdi-translate',
-    description: 'İletişim ve teknik dokümantasyon için akıcı İngilizce bilgisi.',
-  },
-])
+  // Yetenekler verisi (değişmedi)
+  const skills = ref([
+    {
+      name: 'Vue.js',
+      icon: 'mdi-vuejs',
+      description: 'Modern ve reaktif web uygulamaları geliştirme',
+    },
+    {
+      name: 'TypeScript',
+      icon: 'mdi-language-typescript',
+      description: 'Güvenli ve ölçeklenebilir kod yazma',
+    },
+    {
+      name: 'HTML & CSS',
+      icon: 'mdi-language-html5',
+      description: 'Web sayfaları tasarlama ve stilize etme',
+    },
+    {
+      name: 'Fastify',
+      icon: 'mdi-lightning-bolt',
+      description: 'Hızlı ve düşük maliyetli API geliştirme',
+    },
+    {
+      name: '.NET Core',
+      icon: 'mdi-language-csharp',
+      description: 'Çapraz platform uygulamalar geliştirme',
+    },
+    {
+      name: 'Entity Framework',
+      icon: 'mdi-database-search',
+      description: 'Veri tabanı ile nesne ilişkisel eşleme (ORM)',
+    },
+    {
+      name: 'Drizzle ORM',
+      icon: 'mdi-code-braces',
+      description: 'TypeScript/JavaScript için modern ve tipli ORM çözümü',
+    },
+    {
+      name: 'Docker',
+      icon: 'mdi-docker',
+      description: 'Uygulama kapsülleme ve dağıtımı',
+    },
+    {
+      name: 'Veritabanları',
+      icon: 'mdi-database',
+      description: 'Veritabanı tasarımı ve yönetimi',
+    },
+    {
+      name: 'Git & GitHub',
+      icon: 'mdi-git',
+      description: 'Versiyon kontrolü ve işbirliği',
+    },
+    {
+      name: 'İleri Seviye İngilizce',
+      icon: 'mdi-translate',
+      description: 'İletişim ve teknik dokümantasyon için akıcı İngilizce bilgisi.',
+    },
+  ])
 
-// Projeler verisi (değişmedi)
-const projects = ref([
-  {
-    title: 'To-Do Web Application',
-    description: 'Kullanıcıların kişisel görevlerini güvenli bir şekilde yönetebileceği, TypeScript ile geliştirilmiş tam teşekküllü bir web uygulamasıdır. JWT tabanlı kimlik doğrulama ile kullanıcı kaydı ve güvenli oturum yönetimi sunan bu proje, giriş yapan kullanıcılara kendi görevlerini ekleme, silme ve düzenleme imkanı tanır. Bu uygulama, modern web geliştirme ve güvenli backend mimarisi yeteneklerimi sergilemektedir.',
-    image: 'https://i.imgur.com/bHM7XyW.jpeg',
-    link: 'https://github.com/AhmetYavuz0/ToDo-App',
-  },
-  {
-    title: 'KriptoMatris',
-    description: ' Üniversite eğitimimin ilk yılında C programlama diliyle geliştirdiğim bu uygulama, matris operasyonları aracılığıyla temel bir şifreleme algoritması uygulamaktadır. Bu proje, algoritma tasarım ve problem çözme becerilerimi geliştirmeye odaklandığım önemli bir adımdı ve bilgisayar bilimleri temellerine olan ilgimi yansıtmaktadır.',
-    image: 'https://i.imgur.com/0SG1WkA.jpeg',
-    link: 'https://github.com/AhmetYavuz0/Sifre-olustucu-cozucu',
-  },
-  {
-    title: 'Spelling Bee Game',
-    description: 'JavaFX kullanarak geliştirdiğim bu interaktif Spelling Bee oyunu, kullanıcıların kelime dağarcığını ve yazım becerilerini geliştirmeyi amaçlamaktadır. Proje, grafiksel kullanıcı arayüzü (GUI) tasarımı ve oyun mantığı geliştirme konusundaki yeteneklerimi sergilerken, aynı zamanda kullanıcı etkileşimli uygulamalar oluşturma deneyimimi pekiştirdi.',
-    image: 'https://i.imgur.com/Xi4OqLJ.png',
-    link: 'https://github.com/AhmetYavuz0/Spelling-bee-Game',
-  },
-])
+  // Projeler verisi (değişmedi)
+  const projects = ref([
+    {
+      title: 'To-Do Web Application',
+      description: 'Kullanıcıların kişisel görevlerini güvenli bir şekilde yönetebileceği, TypeScript ile geliştirilmiş tam teşekküllü bir web uygulamasıdır. JWT tabanlı kimlik doğrulama ile kullanıcı kaydı ve güvenli oturum yönetimi sunan bu proje, giriş yapan kullanıcılara kendi görevlerini ekleme, silme ve düzenleme imkanı tanır. Bu uygulama, modern web geliştirme ve güvenli backend mimarisi yeteneklerimi sergilemektedir.',
+      image: 'https://i.imgur.com/bHM7XyW.jpeg',
+      link: 'https://github.com/AhmetYavuz0/ToDo-App',
+    },
+    {
+      title: 'KriptoMatris',
+      description: ' Üniversite eğitimimin ilk yılında C programlama diliyle geliştirdiğim bu uygulama, matris operasyonları aracılığıyla temel bir şifreleme algoritması uygulamaktadır. Bu proje, algoritma tasarım ve problem çözme becerilerimi geliştirmeye odaklandığım önemli bir adımdı ve bilgisayar bilimleri temellerine olan ilgimi yansıtmaktadır.',
+      image: 'https://i.imgur.com/0SG1WkA.jpeg',
+      link: 'https://github.com/AhmetYavuz0/Sifre-olustucu-cozucu',
+    },
+    {
+      title: 'Spelling Bee Game',
+      description: 'JavaFX kullanarak geliştirdiğim bu interaktif Spelling Bee oyunu, kullanıcıların kelime dağarcığını ve yazım becerilerini geliştirmeyi amaçlamaktadır. Proje, grafiksel kullanıcı arayüzü (GUI) tasarımı ve oyun mantığı geliştirme konusundaki yeteneklerimi sergilerken, aynı zamanda kullanıcı etkileşimli uygulamalar oluşturma deneyimimi pekiştirdi.',
+      image: 'https://i.imgur.com/Xi4OqLJ.png',
+      link: 'https://github.com/AhmetYavuz0/Spelling-bee-Game',
+    },
+  ])
 
-// Eğitim verisi (değişmedi)
-const education = ref([
-  {
-    degree: 'Bilgisayar Mühendisliği Lisans',
-    institution: 'Erciyes Üniversitesi',
-    date: 'Eylül 2020 - Devam Ediyor',
-    description: 'Yazılım geliştirme, algoritma analizi ve veri tabanı tasarımı üzerine odaklanma.',
-    gpa: '2.95/4.00',
-    color: 'deep-purple-lighten-2',
-  },
-  {
-    degree: 'İngilizce Hazırlık Diploması',
-    institution: 'Erciyes Üniversitesi',
-    date: 'Eylül 2019 - Haziran 2020',
-    description: 'B2 Seviye İngilizce Eğitimi',
-    gpa: '87/100',
-    color: 'deep-purple-lighten-2',
-  },
-  {
-    degree: 'Lise Diploması',
-    institution: 'Final Anadolu Lisesi',
-    date: 'Eylül 2018 - Haziran 2019',
-    description: 'Fen bilimleri ve matematik ağırlıklı eğitim.',
-    color: 'deep-purple-lighten-3',
-  },
-])
+  // Eğitim verisi (değişmedi)
+  const education = ref([
+    {
+      degree: 'Bilgisayar Mühendisliği Lisans',
+      institution: 'Erciyes Üniversitesi',
+      date: 'Eylül 2020 - Devam Ediyor',
+      description: 'Yazılım geliştirme, algoritma analizi ve veri tabanı tasarımı üzerine odaklanma.',
+      gpa: '2.95/4.00',
+      color: 'deep-purple-lighten-2',
+    },
+    {
+      degree: 'İngilizce Hazırlık Diploması',
+      institution: 'Erciyes Üniversitesi',
+      date: 'Eylül 2019 - Haziran 2020',
+      description: 'B2 Seviye İngilizce Eğitimi',
+      gpa: '87/100',
+      color: 'deep-purple-lighten-2',
+    },
+    {
+      degree: 'Lise Diploması',
+      institution: 'Final Anadolu Lisesi',
+      date: 'Eylül 2018 - Haziran 2019',
+      description: 'Fen bilimleri ve matematik ağırlıklı eğitim.',
+      color: 'deep-purple-lighten-3',
+    },
+  ])
 
-// Tecrübe verisi (değişmedi)
-const experience = ref([
-  {
-    position: 'Intern Backend and Frontend Developer',
-    company: 'Ekinoks Software',
-    date: 'Şubat 2025 - Mart 2025',
-    details: [
-      'Node.js (Fastify) kullanarak yüksek performanslı API servisleri geliştirme.',
-      'PostgreSQL veritabanı ile verimli veri yönetimi ve sorgu optimizasyonu yapma.',
-      'Docker ile uygulama kapsülleme ve dağıtım süreçlerine destek olma.',
-      'JWT kullanarak authorization işlemlerini kontrol etme.',
-    ],
-    color: 'blue-lighten-2',
-  },
-])
+  // Tecrübe verisi (değişmedi)
+  const experience = ref([
+    {
+      position: 'Intern Backend and Frontend Developer',
+      company: 'Ekinoks Software',
+      date: 'Şubat 2025 - Mart 2025',
+      details: [
+        'Node.js (Fastify) kullanarak yüksek performanslı API servisleri geliştirme.',
+        'PostgreSQL veritabanı ile verimli veri yönetimi ve sorgu optimizasyonu yapma.',
+        'Docker ile uygulama kapsülleme ve dağıtım süreçlerine destek olma.',
+        'JWT kullanarak authorization işlemlerini kontrol etme.',
+      ],
+      color: 'blue-lighten-2',
+    },
+  ])
 
 </script>
 
