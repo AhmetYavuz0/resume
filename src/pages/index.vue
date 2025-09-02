@@ -339,8 +339,18 @@
 </template>
 
 <script setup>
+  import axios from 'axios'
   import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
   import { useTheme } from 'vuetify'
+
+  onMounted(async () => {
+    try {
+      const res = await axios.get('https://api.ahmet-yavuz.com/log-visit')
+      console.log('Ziyaret loglandı:', res.data)
+    } catch (error) {
+      console.error('Hata oluştu:', error)
+    }
+  })
 
   const drawer = ref(false)
   const isMobile = ref(false)
